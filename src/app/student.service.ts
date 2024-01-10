@@ -15,7 +15,7 @@ export class StudentService {
 
   getStudents(): Observable<Student[]> {
     const heroes = of(STUDENTS);
-    this.messageService.add('HeroService: fetched heroes');
+    this.messageService.add('StudentService: fetched students');
     return heroes;
   }
 }

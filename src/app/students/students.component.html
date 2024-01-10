@@ -1,6 +1,6 @@
-<h2>My Heroes</h2>
+<h2>Students</h2>
 
-<ul class="heroes">
+<ul class="students">
   <li *ngFor="let student of students">
     <button [class.selected]="student === selectedStudent" type="button" (click)="onSelect(student)">
       <span class="badge">{{student.id}}</span>
