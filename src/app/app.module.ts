@@ -1,22 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { StudentComponent } from './students/students.component';
+import { StudentsComponent } from './students/students.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MessagesComponent,
+    StudentsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    StudentComponent,
     StudentDetailComponent
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    // no need to place any providers due to the `providedIn` flag...
+  ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

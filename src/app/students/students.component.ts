@@ -1,34 +1,33 @@
-import {Component} from '@angular/core';
-import {
-  NgIf,
-  NgFor,
-  UpperCasePipe,
-} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 
 import { Student } from '../student';
-import {STUDENTS} from '../mock-students';
-import {StudentDetailComponent} from "../student-detail/student-detail.component";
+import { StudentService } from '../student.service';
+import { MessageService } from '../message.service';
 
 @Component({
-  standalone: true,
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css'],
-  imports: [
-    FormsModule,
-    NgIf,
-    NgFor,
-    UpperCasePipe,
-    StudentDetailComponent,
-  ],
+  styleUrls: ['./students.component.css']
 })
+export class StudentsComponent implements OnInit {
 
-export class StudentComponent {
-  students = STUDENTS;
   selectedStudent?: Student;
+
+  students: Student[] = [];
+
+  constructor(private studentService: StudentService, private messageService: MessageService) { }
+
+  ngOnInit(): void {
+    this.getStudents();
+  }
 
   onSelect(student: Student): void {
     this.selectedStudent = student;
+    this.messageService.add(`StudentsComponent: Selected student id=${student.id}`);
+  }
+
+  getStudents(): void {
+    this.studentService.getStudents()
+      .subscribe(students => this.students = students);
   }
 }

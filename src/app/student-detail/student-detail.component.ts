@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {Student} from '../student';
 
 @Component({
-  standalone: true,
   selector: 'app-student-detail',
   templateUrl: './student-detail.component.html',
   styleUrls: ['./student-detail.component.css'],
