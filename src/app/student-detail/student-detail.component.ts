@@ -1,15 +1,35 @@
-import {Component, Input} from '@angular/core';
-import {NgIf, UpperCasePipe} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {Student} from '../student';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { Student } from '../student';
+import { StudentService } from '../student.service';
 
 @Component({
-  standalone: true,
   selector: 'app-student-detail',
   templateUrl: './student-detail.component.html',
-  styleUrls: ['./student-detail.component.css'],
-  imports: [FormsModule, NgIf, UpperCasePipe],
+  styleUrls: [ './student-detail.component.css' ]
 })
-export class StudentDetailComponent {
-  @Input() student?: Student;
+export class StudentDetailComponent implements OnInit {
+  student: Student | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private studentService: StudentService,
+    private location: Location
+  ) {}
+
+  ngOnInit(): void {
+    this.getStudent();
+  }
+
+  getStudent(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.studentService.getStudent(id)
+      .subscribe(student => this.student = student);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }
