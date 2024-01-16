@@ -1,7 +1,33 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/students">Students</a>
-</nav>
-<router-outlet></router-outlet>
-<app-messages></app-messages>
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">{{title}}</a>
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/dashboard" class="nav-link bg-secondary mx-2" routerLink="dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a href="/students" class="nav-link bg-secondary mx-2" routerLink="students">Students</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link bg-secondary mx-2" routerLink="register">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link bg-secondary mx-2" routerLink="login">Login</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link bg-secondary mx-2" routerLink="profile">{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link bg-secondary mx-2" (click)="logout()">LogOut</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
